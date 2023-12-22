@@ -14,15 +14,16 @@ interface IMenuProps {
     modalIsShown: boolean;
     openModal: () => void;
     showAlert: boolean;
+    rpcUrl: string;
 }
 
 const Menu = (props: IMenuProps) => {
     const menuItems = props.games.map((game, index) => (
-        <MenuItem
-            deleteGame={props.deleteGame}
-            info={game}
-            index={index}
-            key={"game" + index}
+        <MenuItem 
+            deleteGame={props.deleteGame} 
+            info={game} 
+            index={game.index!} 
+            key={"game" + game.index} 
         />
     ));
     return (
@@ -59,7 +60,7 @@ const Menu = (props: IMenuProps) => {
                 Sorry, this browser does not support local storage. Please try
                 using a different browser.
             </Alert>
-            <NewGameModal shown={props.modalIsShown} close={props.closeModal} />
+            <NewGameModal shown={props.modalIsShown} close={props.closeModal} rpcUrl={props.rpcUrl} />
         </div>
     );
 };
